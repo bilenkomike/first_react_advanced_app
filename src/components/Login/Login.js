@@ -12,9 +12,15 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes('@') && enteredPassword.trim().length > 6
-    );
+    const identifier = setTimeout(() => {
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    }, 500);
+    
+    return () => {
+      clearTimeout(identifier);
+    };
   }, [enteredEmail, enteredPassword]); // we use dependencies for updating the states(for instance) when we enter the values in dependencies change or one or other.
 
 
